@@ -107,7 +107,48 @@ console.log(`${person1.name} has "${person1.stomach}" in their stomach`);
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-class Car {}
+class Car {
+  constructor(model, milesPerGallon) {
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+  }
+  fill(gallons) {
+    this.tank = this.tank + gallons;
+    console.log(
+      `You put ${gallons} gallons into your tank, you have ${this.tank} gallons total in your ${this.model}`
+    );
+  }
+  drive(distance) {
+    if (this.tank * this.milesPerGallon > distance) {
+      this.odometer = this.odometer + distance;
+      console.log(`Odometer is at ${this.odometer}`);
+      this.tank = this.tank - distance / this.milesPerGallon;
+      console.log(`Tank is at ${this.tank}`);
+    } else {
+      this.odometer = this.odometer + this.tank * this.milesPerGallon;
+      console.log(
+        `You ran out of gas at an odometer reading of ${this.odometer}`
+      );
+      this.tank = 0;
+    }
+  }
+}
+
+const car1 = new Car("Ford", 10);
+
+console.log(car1);
+
+car1.fill(6);
+
+console.log(car1.drive(50));
+
+console.log(car1.drive(5));
+
+console.log(car1.drive(4));
+
+console.log(car1.drive(1));
 
 /*
   TASK 3
